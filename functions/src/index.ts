@@ -8,6 +8,8 @@ export {userDeleted} from './triggers/user-deleted';
 export {fileCreated} from './triggers/file-created';
 export {fileDeleted} from './triggers/file-deleted';
 export {customerDeleted} from './triggers/customer-deleted';
+export {productDeletedEn} from './triggers/single-product-deleted';
+export {productDeletedHr} from './triggers/single-product-deleted';
 
 // Rest
 export {exportData} from './rest/export-data';

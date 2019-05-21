@@ -3,6 +3,7 @@ import * as functions from 'firebase-functions';
 import {basename, dirname, join} from 'path';
 
 export const fileDeleted = functions.storage.object().onDelete(async data => {
+  console.log('data', data);
   const fileName = basename(data.name);
   const dirName = dirname(data.name);
   /**
