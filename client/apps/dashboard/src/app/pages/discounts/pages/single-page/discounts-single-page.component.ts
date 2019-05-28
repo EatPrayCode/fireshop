@@ -5,11 +5,6 @@ import {LangSinglePageComponent} from '../../../../shared/components/lang-single
 import {URL_REGEX} from '../../../../shared/const/url-regex.const';
 import * as nanoid from 'nanoid';
 
-export enum DiscountValueType {
-  FixedAmount = 'fixedAmount',
-  Percentage = 'percentage'
-}
-
 export enum LimitType {
   Limited = 'limited',
   Unlimited = 'unlimited'
@@ -22,7 +17,6 @@ export enum LimitType {
 })
 export class DiscountsSinglePageComponent extends LangSinglePageComponent {
   collection = FirestoreCollections.Discounts;
-  discountValueType = DiscountValueType;
   limitType = LimitType;
 
   public buildForm(data: any) {
@@ -34,10 +28,7 @@ export class DiscountsSinglePageComponent extends LangSinglePageComponent {
       name: [data.name || '', Validators.required],
       code: [data.code || '', Validators.required],
       description: [data.description || ''],
-      valueType: [
-        data.valueType || this.discountValueType.Percentage,
-        Validators.required
-      ],
+      fixed: [data.fixed || false, Validators.required],
       startingDate: [data.startingDate || ''],
       endingDate: [data.endingDate || ''],
       value: [data.value || ''],

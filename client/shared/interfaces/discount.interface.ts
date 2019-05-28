@@ -4,7 +4,7 @@ export interface Discount {
   name: string;
   createdOn: number;
   description: string;
-  valueType: string;
+  fixed: boolean;
   startingDate: number;
   endingDate: number;
   type: string;
