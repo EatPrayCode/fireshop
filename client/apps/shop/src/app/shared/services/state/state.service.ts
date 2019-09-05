@@ -46,12 +46,14 @@ export class StateService {
   logInValid$ = new BehaviorSubject<boolean>(true);
   user$: Observable<LoggedInUser>;
   loading$ = new BehaviorSubject<boolean>(false);
-  checkoutResult: Array<Errors> | Partial<Order>;
 
   currentRoute$ = new BehaviorSubject<{data: any; url: string}>({
     data: {},
     url: '/'
   });
+
+  checkoutResult: Array<Errors> | Partial<Order>;
+  partialCheckout: any;
 
   structuredData: any = {};
   serverState: any;

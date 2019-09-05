@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
+  OnDestroy,
   OnInit,
   QueryList,
   ViewChildren
@@ -84,7 +85,7 @@ function cardValidator(cardChanges$: CheckoutState['stripe']['cardChanges$']) {
   styleUrls: ['./checkout.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CheckoutComponent extends RxDestroy implements OnInit {
+export class CheckoutComponent extends RxDestroy implements OnInit, OnDestroy {
   constructor(
     public cartService: CartService,
     public afAuth: AngularFireAuth,
@@ -234,6 +235,10 @@ export class CheckoutComponent extends RxDestroy implements OnInit {
   }
 
   buildForm(value: Partial<Customer>, cardChanges$) {
+    if (this.state.partialCheckout) {
+      value = this.state.partialCheckout;
+    }
+
     const group = this.fb.group(
       {
         billing: this.addressForm(value.billing ? value.billing : {}),
@@ -284,9 +289,7 @@ export class CheckoutComponent extends RxDestroy implements OnInit {
     if (this.afAuth.auth.currentUser && data.saveInfo) {
       this.afs
         .doc(
-          `${FirestoreCollections.Customers}/${
-            this.afAuth.auth.currentUser.uid
-          }`
+          `${FirestoreCollections.Customers}/${this.afAuth.auth.currentUser.uid}`
         )
         .update(data);
     }

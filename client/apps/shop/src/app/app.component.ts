@@ -93,6 +93,10 @@ export class AppComponent implements OnInit {
     if (environment.serviceWorker) {
       this.connectSw();
     }
+
+    window.addEventListener('beforeunload', () => {
+      localStorage.setItem('pero', '123');
+    });
   }
 
   openCheckout() {

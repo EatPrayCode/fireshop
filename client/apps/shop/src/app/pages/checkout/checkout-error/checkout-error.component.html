@@ -4,12 +4,21 @@
     <div class="col-6 col-m-8 col-s-10 col-xs-12">
       <mat-card>
         <h5 class="fw-reg">An error has occurred</h5>
-        <div *ngFor="let single of error">
-          <p class="m-t-s m-b-m">{{single.message}}</p>
-        </div>
-        <button mat-flat-button color="primary" (click)="resolveIssue()">Resolve issues</button>
-        <span class="m-r-s"></span>
-        <button mat-flat-button color="primary" (click)="clearCart()">Clear cart</button>
+        <ng-container *ngIf="error; else unknownError;">
+          <div *ngFor="let single of error">
+            <p class="m-t-s m-b-m">{{single.message}}</p>
+          </div>
+
+          <button mat-flat-button color="primary" (click)="resolveIssue()">Resolve issues</button>
+          <span class="m-r-s"></span>
+          <button mat-flat-button color="primary" (click)="clearCart()">Clear cart</button>
+        </ng-container>
+
+        <ng-template #unknownError>
+          <p class="m-t-s m-b-m">We're not sure what went wrong but the error has been reported to our administrators.</p>
+          <button mat-flat-button routerLink="/">Back to shop</button>
+        </ng-template>
+
       </mat-card>
     </div>
   </div>
